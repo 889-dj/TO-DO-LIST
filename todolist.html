@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To Do List</title>
+    <style>
+      #todolist{
+        width: 350px;
+        height:200px ;
+        font: 14px arial;
+        background:lightyellow ;
+        border:5px groove gray ;
+        overflow-y:scroll ;
+        padding: 4px;
+      }
+      #todolist ol{
+        margin-left: -15px;
+      }
+      #todolist li{
+        border-bottom: 1px solid gray;
+        margin-bottom: 8px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    
+    <div id="todolist" contenteditable="true">
+    <div contenteditable="false"><b>ENTER YOUR TASKS:</b></div>
+    <ol>
+      <li>take breakfast</li>
+      <li>google meet</li>
+      <li>set alarm</li>
+    </ol>
+  </div>
+  <input type="submit" value="reset" onclick="resetlist();return false"/>
+  <script>
+    var defaulthtml='<div contenteditable="false"><b>ENTER YOUR TASKS:</b></div>\n'
+    defaulthtml+='<ol>\n'
+    defaulthtml+='<li>take breakfast</li>\n'
+    defaulthtml+='<li>google meet</li>\n'
+    defaulthtml+='<li>set alarm</li>\n'
+    defaulthtml+='<ol>\n'
+  function resetlist(){
+    todolistref.innerHTML=defaulthtml
+    domstorage.todolistdata=defaulthtml
+  }
+  var todolistref=document.getElementById("todolist")
+  var domstorage=(window.sessionStorage)?sessionStorage[location.hostname]:null
+  if(domstorage){
+    if(domstorage.todolistdata){
+    todolistref.innerHTML=domstorage.todolistdata
+  }
+
+  todolistref.onekeyup=function(e){
+    domstorage.todolistdata=this.innerHTML
+  }
+  }
+  </script>
+    
+  </body>
+</html>
